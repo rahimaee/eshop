@@ -22,10 +22,10 @@ from django.conf.urls.static import static
 from .views import home_page, header, footer
 
 urlpatterns = [
-    path('', home_page, name='starting-page'),
+    path('', home_page, name='starting_page'),
     path('header', header, name='header'),
     path('footer', footer, name='footer'),
-    path('account/', include('eshop_account.urls')),
+    path('account/', include('eshop_account.urls', namespace='account')),
     path('admin/', admin.site.urls),
 
 ]

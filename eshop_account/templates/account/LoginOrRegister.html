@@ -1,18 +1,63 @@
 {% extends 'shared/_MainLayout.html' %}
-{% load render_partial %}
+
 
 {% block title %}ثبت نام ورود{% endblock %}
 
 {% block content %}
 
+
     <div class="container">
         <section id="form"><!--form-->
             <div class="row">
-                {% render_partial 'login' %}
+                <div class="col-sm-4 col-sm-offset-1">
+                    <div class="login-form"><!--login form-->
+                        <h2>ورود به حساب کاربـری :</h2>
+                        <form method="post">
+                            {% csrf_token %}
+                            {{ login_form }}
+                            <span>
+								<input type="checkbox" class="checkbox">
+								مرا بخاطـر بسپـار
+							</span>
+                            <span>
+								<a href="forget-password.html">رمـز عبـور خود را فراموش کرده ام</a>
+							</span>
+                            <button type="submit" name="login_form"  class="btn btn-default">ورود</button>
+                        </form>
+                    </div><!--/login form-->
+                </div>
                 <div class="col-sm-1">
                     <h2 class="or">یا</h2>
                 </div>
-                {% render_partial 'register' %}
+                <div class="col-sm-4">
+                    <div class="signup-form"><!--sign up form-->
+                        <h2>ثبت نام کاربـر جدیـد</h2>
+                        <form method="post">
+                            {% csrf_token %}
+                            {{ register_form.email.label }}
+                            {{ register_form.email }}
+                            {% for foo in register_form.email.validators %}
+                                {{ foo }}
+                            {% endfor %}
+                            {{ register_form.user_name.label }}
+                            {{ register_form.user_name }}
+                            {% for foo in register_form.user_name.validators %}
+                                {{ foo }}
+                            {% endfor %}
+                            {{ register_form.password.label }}
+                            {{ register_form.password }}
+                            {% for foo in register_form.password.validators %}
+                                {{ foo }}
+                            {% endfor %}
+                            {{ register_form.password_config.label }}
+                            {{ register_form.password_config }}
+                            {% for foo in register_form.password_config.validators %}
+                                {{ foo }}
+                            {% endfor %}
+                            <button type="submit" name="register_form" class="btn btn-default">ثبت نام</button>
+                        </form>
+                    </div><!--/sign up form-->
+                </div>
             </div>
         </section>
     </div>

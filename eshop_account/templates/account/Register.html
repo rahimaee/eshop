@@ -1,0 +1,44 @@
+{% extends 'shared/_MainLayout.html' %}
+
+
+{% block title %}ثبت نام ورود{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <section id="form"><!--form-->
+            <div class="row">
+                <div class="col-sm-4 col-sm-offset-1">
+                    <div class="signup-form"><!--sign up form-->
+                        <h2>ثبت نام کاربـر جدیـد</h2>
+                        <form method="post">
+                            {% csrf_token %}
+
+                            {{ register_form }}
+{#                            {{ register_form.email.label }}#}
+{#                            {{ register_form.email }}#}
+{#                            {% for foo in register_form.email.validators %}#}
+{#                                {{ foo }}#}
+{#                            {% endfor %}#}
+{#                            {{ register_form.user_name.label }}#}
+{#                            {{ register_form.user_name }}#}
+{#                            {% for foo in register_form.user_name.validators %}#}
+{#                                {{ foo }}#}
+{#                            {% endfor %}#}
+{#                            {{ register_form.password.label }}#}
+{#                            {{ register_form.password }}#}
+{#                            {% for foo in register_form.password.validators %}#}
+{#                                {{ foo }}#}
+{#                            {% endfor %}#}
+{#                            {{ register_form.password_config.label }}#}
+{#                            {{ register_form.password_config }}#}
+{#                            {% for foo in register_form.password_config.validators %}#}
+{#                                {{ foo }}#}
+{#                            {% endfor %}#}
+                            <button type="submit" name="register_form" class="btn btn-default">ثبت نام</button>
+                        </form>
+                    </div><!--/sign up form-->
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}
