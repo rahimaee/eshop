@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_render_partial',
     'eshop_account',
-    'eshop_project',
+    'eshop_products',
 ]
 
 MIDDLEWARE = [

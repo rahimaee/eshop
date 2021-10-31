@@ -26,6 +26,7 @@ urlpatterns = [
     path('header', header, name='header'),
     path('footer', footer, name='footer'),
     path('account/', include('eshop_account.urls', namespace='account')),
+    # path('products/', include('eshop_project', namespace='products')),
     path('admin/', admin.site.urls),
 
 ]
