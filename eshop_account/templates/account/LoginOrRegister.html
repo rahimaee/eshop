@@ -1,0 +1,19 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load render_partial %}
+
+{% block title %}ثبت نام ورود{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <section id="form"><!--form-->
+            <div class="row">
+                {% render_partial 'login' %}
+                <div class="col-sm-1">
+                    <h2 class="or">یا</h2>
+                </div>
+                {% render_partial 'register' %}
+            </div>
+        </section>
+    </div>
+{% endblock %}

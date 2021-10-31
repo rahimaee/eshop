@@ -25,6 +25,7 @@ urlpatterns = [
     path('', home_page, name='starting-page'),
     path('header', header, name='header'),
     path('footer', footer, name='footer'),
+    path('account/', include('eshop_account.urls')),
     path('admin/', admin.site.urls),
 
 ]
