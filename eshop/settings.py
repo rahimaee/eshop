@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'eshop_tag',
     'eshop_product_category',
     'treebeard',
+    'mptt',
 ]
 
 MIDDLEWARE = [

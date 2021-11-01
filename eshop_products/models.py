@@ -3,6 +3,8 @@ from django.db import models
 import os
 from django.shortcuts import reverse
 from django.db.models import Q
+from mptt.fields import TreeForeignKey
+
 from eshop_tag.models import Tag
 
 
@@ -48,6 +50,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to=upload_image_path, null=True, blank=True, verbose_name='تصویر')
     is_active = models.BooleanField(default=False, verbose_name='فعال/غیرفعال')
     Tag = models.ManyToManyField(Tag, blank=True)
+    category = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
 
     objects = ProductManager()
 
