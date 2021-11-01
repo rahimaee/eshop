@@ -2,6 +2,8 @@ from random import randint
 from django.db import models
 import os
 from django.shortcuts import reverse
+from django.db.models import Q
+
 
 # Create your models here.
 # image name on  server
@@ -29,6 +31,10 @@ class ProductManager(models.Manager):
         else:
             return None
 
+    def search(self, query):
+        lookup = Q(title__icontains=query) | Q(description__icontains=query)
+        return self.get_queryset().filter(lookup, is_active=True).distinct()
+
 
 class Product(models.Model):
     title = models.CharField(max_length=150, verbose_name='عنوان')
@@ -47,4 +53,4 @@ class Product(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return f"{reverse('products_url:list')}{self.id}/{self.title.replace(' ','-')}"
+        return f"{reverse('products_url:list')}{self.id}/{self.title.replace(' ', '-')}"

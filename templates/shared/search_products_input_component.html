@@ -1,0 +1,7 @@
+<div class="col-sm-3">
+    <div class="search_box pull-left">
+      <form action="{% url 'eshop_products:search' %}" method="get">
+            <input type="text" placeholder="جستـجو" name="q" value="{{ request.GET.q }}"/>
+      </form>
+    </div>
+</div>
