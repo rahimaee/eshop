@@ -1,7 +1,7 @@
 from random import randint
 from django.db import models
 import os
-
+from django.shortcuts import reverse
 
 # Create your models here.
 # image name on  server
@@ -18,12 +18,33 @@ def upload_image_path(instance, filename):
     return f"product/{final_name}"
 
 
+class ProductManager(models.Manager):
+    def get_active(self):
+        return self.get_queryset().filter(is_active=True)
+
+    def get_by_id(self, product_id):
+        qs = self.get_queryset().filter(id=product_id)
+        if qs.count() == 1:
+            return qs.first()
+        else:
+            return None
+
+
 class Product(models.Model):
-    title = models.CharField(max_length=150)
-    description = models.TextField()
-    price = models.IntegerField()
-    image = models.ImageField(upload_to=upload_image_path, null=True, blank=True)
-    is_active = models.BooleanField(default=False)
+    title = models.CharField(max_length=150, verbose_name='عنوان')
+    description = models.TextField(verbose_name='توضیحان')
+    price = models.IntegerField(verbose_name='قیمت')
+    image = models.ImageField(upload_to=upload_image_path, null=True, blank=True, verbose_name='تصویر')
+    is_active = models.BooleanField(default=False, verbose_name='فعال/غیرفعال')
+
+    objects = ProductManager()
+
+    class Meta:
+        verbose_name = 'محصول'
+        verbose_name_plural = 'محصولات'
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return f"{reverse('products_url:list')}{self.id}/{self.title.replace(' ','-')}"
