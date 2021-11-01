@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'eshop_account',
     'eshop_products',
     'eshop_tag',
+    'eshop_product_category',
+    'treebeard',
 ]
 
 MIDDLEWARE = [
@@ -67,6 +69,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.request',
+
             ],
         },
     },
