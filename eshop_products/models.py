@@ -3,6 +3,7 @@ from django.db import models
 import os
 from django.shortcuts import reverse
 from django.db.models import Q
+from eshop_tag.models import Tag
 
 
 # Create your models here.
@@ -32,7 +33,11 @@ class ProductManager(models.Manager):
             return None
 
     def search(self, query):
-        lookup = Q(title__icontains=query) | Q(description__icontains=query)
+        lookup = (
+                Q(title__icontains=query) |
+                Q(description__icontains=query) |
+                Q(Tag__title__icontains=query)
+        )
         return self.get_queryset().filter(lookup, is_active=True).distinct()
 
 
@@ -42,6 +47,7 @@ class Product(models.Model):
     price = models.IntegerField(verbose_name='قیمت')
     image = models.ImageField(upload_to=upload_image_path, null=True, blank=True, verbose_name='تصویر')
     is_active = models.BooleanField(default=False, verbose_name='فعال/غیرفعال')
+    Tag = models.ManyToManyField(Tag, blank=True)
 
     objects = ProductManager()
 

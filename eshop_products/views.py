@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView
 from .models import Product
 from django.http import Http404
+from eshop_products.models import Tag
 
 
 # Create your views here.
@@ -21,9 +22,12 @@ def products_detail(request, *args, **kwargs):
     product = Product.objects.get_by_id(product_id)
     if product is None or not product.is_active:
         raise Http404()
+    tag = product.Tag.all()
     context = {
-        'product': product
+        'product': product,
+        'tag': tag
     }
+
     return render(request, 'products/product-details.html', context)
 
 
