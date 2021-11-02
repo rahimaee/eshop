@@ -1,7 +1,53 @@
 {% extends 'shared/_MainLayout.html' %}
 {% load static %}
+{% load mptt_tags %}
 
+
+{% block header_ref %}
+    <style>
+        ul, #myUL {
+            list-style-type: none;
+        }
+
+        /* Remove margins and padding from the parent ul */
+        #myUL {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Style the caret/arrow */
+        .caret {
+            cursor: pointer;
+            user-select: none; /* Prevent text selection */
+        }
+
+        /* Create the caret/arrow with a unicode, and style it */
+        .caret::before {
+            content: "\25B6";
+            color: black;
+            display: inline-block;
+            margin-right: 6px;
+        }
+
+        /* Rotate the caret/arrow icon when clicked on (using JavaScript) */
+        .caret-down::before {
+            transform: rotate(90deg);
+        }
+
+        /* Hide the nested list */
+        .nested {
+            display: none;
+        }
+
+        /* Show the nested list when the user clicks on the caret/arrow (with JavaScript) */
+        .active {
+            display: block;
+        }
+    </style>
+{% endblock %}
 {% block content %}
+
+
     <section>
         <div class="container">
             <div class="row">
@@ -176,62 +222,13 @@
                             </div>
 
                             <div class="tab-pane fade" id="tag">
-                                <div class="col-sm-3">
-                                    <div class="product-image-wrapper">
-                                        <div class="single-products">
-                                            <div class="productinfo text-center">
-                                                <img src="{% static 'images/product-details/rating.png' %}" alt="">
-                                                <h2>1.250.000 ريال</h2>
-                                                <p>توضیحات کوتاه محصول</p>
-                                                <button type="button" class="btn btn-default add-to-cart"><i
-                                                        class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد
-                                                </button>
-                                            </div>
-                                        </div>
+                                {% for foo in tag %}
+                                    <div>
+                                        <a href="{{ foo.slug }}" style="color: #1b1b1b">{{ foo.title }}</a>
                                     </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="product-image-wrapper">
-                                        <div class="single-products">
-                                            <div class="productinfo text-center">
-                                                <img src="{% static 'images/product-details/rating.png' %}" alt="">
-                                                <h2>1.250.000 ريال</h2>
-                                                <p>توضیحات کوتاه محصول</p>
-                                                <button type="button" class="btn btn-default add-to-cart"><i
-                                                        class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="product-image-wrapper">
-                                        <div class="single-products">
-                                            <div class="productinfo text-center">
-                                                <img src="{% static 'images/product-details/rating.png' %}" alt="">
-                                                <h2>1.250.000 ريال</h2>
-                                                <p>توضیحات کوتاه محصول</p>
-                                                <button type="button" class="btn btn-default add-to-cart"><i
-                                                        class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="product-image-wrapper">
-                                        <div class="single-products">
-                                            <div class="productinfo text-center">
-                                                <img src="{% static 'images/product-details/rating.png' %}" alt="">
-                                                <h2>1.250.000 ريال</h2>
-                                                <p>توضیحات کوتاه محصول</p>
-                                                <button type="button" class="btn btn-default add-to-cart"><i
-                                                        class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                {% endfor %}
+
+
                             </div>
 
                             <div class="tab-pane fade" id="reviews">
@@ -379,84 +376,29 @@
                     <div class="left-sidebar">
                         <h2>دسته بندی محصولات</h2>
                         <div class="panel-group category-products" id="accordian"><!--category-productsr-->
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
-                                            <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                                            دسته 1
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="sportswear" class="panel-collapse collapse">
-                                    <div class="panel-body">
-                                        <ul>
-                                            <li><a href="">محصول 1 </a></li>
-                                            <li><a href="">محصول 2 </a></li>
-                                            <li><a href="">محصول 3 </a></li>
-                                            <li><a href="">محصول 4</a></li>
-                                            <li><a href="">محصول 5</a></li>
-                                        </ul>
+                            {% recursetree category %}
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h8 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordian" href="#{{ node.name }}">
+                                                <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                                                {{ node.name }}
+                                            </a>
+                                        </h8>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordian" href="#mens">
-                                            <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                                            دسته 2
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="mens" class="panel-collapse collapse">
-                                    <div class="panel-body">
-                                        <ul>
-                                            <li><a href="">محصول 1 </a></li>
-                                            <li><a href="">محصول 2 </a></li>
-                                            <li><a href="">محصول 3 </a></li>
-                                            <li><a href="">محصول 4</a></li>
-                                            <li><a href="">محصول 5</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+                                    {% if not node.is_leaf_node %}
+                                        <div id="{{ node.name }}" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                <ul>
+                                                    <li><a href="">  {{ children }} </a></li>
 
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="#">محصول 1</a></h4>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    {% endif %}
                                 </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="#">محصول 2</a></h4>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="#">محصول 3</a></h4>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="#">محصول 4</a></h4>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="#">محصول 5</a></h4>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="#">محصول 6</a></h4>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="#">محصول 7</a></h4>
-                                </div>
-                            </div>
+                            {% endrecursetree %}
+
                         </div><!--/category-productsr-->
 
                         <div class="brands_products"><!--brands_products-->
@@ -503,4 +445,19 @@
             </div>
         </div>
     </section>
+
+{% endblock %}
+
+{% block footer_ref %}
+    <script>
+        var toggler = document.getElementsByClassName("caret");
+        var i;
+
+        for (i = 0; i < toggler.length; i++) {
+            toggler[i].addEventListener("click", function () {
+                this.parentElement.querySelector(".nested").classList.toggle("active");
+                this.classList.toggle("caret-down");
+            });
+        }
+    </script>
 {% endblock %}

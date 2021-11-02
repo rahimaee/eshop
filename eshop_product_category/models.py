@@ -31,7 +31,7 @@ class Category(MPTTModel):
     image = models.ImageField(upload_to=upload_image_path, null=True, blank=True, verbose_name='تصویر')
     is_active = models.BooleanField(default=False, verbose_name='فعال/غیرفعال')
     Tag = models.ManyToManyField(Tag, blank=True)
-    url = models.SlugField(blank=True)
+    url = models.CharField(max_length=120, unique=True)
 
     def __str__(self):
         return self.name
@@ -39,13 +39,15 @@ class Category(MPTTModel):
     class MPTTMeta:
         order_insertion_by = ['name']
 
-    def get_absolute_url(self):
-        return f"{reverse('category_url:search')}{self.slug}/{self.title.replace(' ', '-')}"
 
 
-def category_pre_save_receiver(sender, instance, *args, **kwargs):
-    if not instance.slug:
-        instance.slug = unique_slug_generator(instance)
+#     def get_absolute_url(self):
+#         return f"{reverse('category_url:search')}{self.slug}/{self.title.replace(' ', '-')}"
+#
+#
+# def category_pre_save_receiver(sender, instance, *args, **kwargs):
+#     if not instance.slug:
+#         instance.slug = unique_slug_generator(instance)
 
 
-pre_save.connect(category_pre_save_receiver, sender=Category)
+# pre_save.connect(category_pre_save_receiver, sender=Category)

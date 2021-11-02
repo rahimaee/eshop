@@ -4,24 +4,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>{% block title %}no_title_data{% endblock %}</title>
+    <title>صفحه اصلی | فروشگاه کارزیبا</title>
     {% include 'shared/_HeaderReferences.html' %}
-    {% block Header_ref %}{% endblock %}
-
-</head><!--/head-->
-
+    {% block header_ref %}{% endblock %}
+</head>
 <body>
 
 {% render_partial 'header' %}
 
 {% block content %}{% endblock %}
-
-
 {% render_partial 'footer' %}
-
-{% block Footer_ref %}{% endblock %}
+{% include 'shared/_FooterReferences.html' %}
+{% block footer_ref %}{% endblock %}
 </body>
 </html>

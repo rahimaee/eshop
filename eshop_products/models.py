@@ -3,7 +3,7 @@ from django.db import models
 import os
 from django.shortcuts import reverse
 from django.db.models import Q
-from mptt.fields import TreeForeignKey
+from mptt.fields import TreeForeignKey, TreeManyToManyField
 from eshop_product_category.models import Category
 from eshop_tag.models import Tag
 
@@ -42,6 +42,9 @@ class ProductManager(models.Manager):
         )
         return self.get_queryset().filter(lookup, is_active=True).distinct()
 
+    def get_product_by_category(self, category_id):
+        return self.get_queryset().filter(category__id=category_id).all()
+
 
 class Product(models.Model):
     title = models.CharField(max_length=150, verbose_name='عنوان')
@@ -50,8 +53,8 @@ class Product(models.Model):
     image = models.ImageField(upload_to=upload_image_path, null=True, blank=True, verbose_name='تصویر')
     is_active = models.BooleanField(default=False, verbose_name='فعال/غیرفعال')
     Tag = models.ManyToManyField(Tag, blank=True)
-    category = TreeForeignKey(Category, blank=True, on_delete=models.CASCADE)
-
+    # category = models.ManyToManyField(Category, blank=True)
+    category = TreeManyToManyField(Category, blank=True)
     objects = ProductManager()
 
     class Meta:
