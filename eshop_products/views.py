@@ -41,3 +41,6 @@ class SearchProductView(ListView):
         if query is not None:
             return Product.objects.search(query)
         return Product.objects.get_active()
+
+
+

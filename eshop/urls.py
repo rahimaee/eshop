@@ -23,10 +23,12 @@ from .views import home_page, header, footer
 
 urlpatterns = [
     path('', home_page, name='starting_page'),
+    path('', include('eshop_product_category.urls', namespace='category_url')),
     path('products/', include('eshop_products.urls', namespace='products_url')),
     path('header', header, name='header'),
     path('footer', footer, name='footer'),
     path('account/', include('eshop_account.urls', namespace='account')),
+
     path('admin/', admin.site.urls),
 
 ]
