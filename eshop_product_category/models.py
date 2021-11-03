@@ -25,21 +25,26 @@ def upload_image_path(instance, filename):
 
 
 class Category(MPTTModel):
-    name = models.CharField(max_length=50, unique=True)
-    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
-    description = models.TextField(verbose_name='توضیحان')
+    name = models.CharField(max_length=50, unique=True, verbose_name='نام دسته بندی')
+    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children',
+                            verbose_name='دسته بندی مادر')
+    description = models.TextField(verbose_name='توضیحات')
     image = models.ImageField(upload_to=upload_image_path, null=True, blank=True, verbose_name='تصویر')
     is_active = models.BooleanField(default=False, verbose_name='فعال/غیرفعال')
-    Tag = models.ManyToManyField(Tag, blank=True)
-    url = models.CharField(max_length=120, unique=True)
+    Tag = models.ManyToManyField(Tag, blank=True, verbose_name='تگ ها')
+    url = models.CharField(max_length=120, unique=True, verbose_name='آدرس در url')
 
     def __str__(self):
         return self.name
 
     class MPTTMeta:
         order_insertion_by = ['name']
+        verbose_name = 'دسته بندی'
+        verbose_name_plural = 'دسته بندی ها'
 
-
+    class Meta:
+        verbose_name = 'دسته بندی'
+        verbose_name_plural = 'دسته بندی ها'
 
 #     def get_absolute_url(self):
 #         return f"{reverse('category_url:search')}{self.slug}/{self.title.replace(' ', '-')}"

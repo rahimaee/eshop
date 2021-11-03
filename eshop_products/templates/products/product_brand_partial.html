@@ -1,0 +1,8 @@
+<div class="brands-name">
+    <ul class="nav nav-pills nav-stacked">
+        {% for foo in brand %}
+            <li><a href="{% url 'eshop_products:brand' %}/{{ foo.url }}"> <span
+                    class="pull-left">(50)</span>{{ foo.title }}</a></li>
+        {% endfor %}
+    </ul>
+</div>

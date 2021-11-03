@@ -1,5 +1,7 @@
 {% extends 'shared/_MainLayout.html' %}
 {% load static %}
+{% load render_partial %}
+
 {% block content %}
     <section id="advertisement">
         <div class="container">
@@ -16,7 +18,7 @@
                         <h2 class="title text-center">محصولات عمده</h2>
 
                         {% for object in page_obj %}
-                           {% include 'products/product_item_component.html' %}
+                            {% include 'products/product_item_component.html' %}
                         {% endfor %}
 
 
@@ -30,7 +32,7 @@
                             {% for page in paginator.page_range %}
                                 {% if page == page_obj.number %}
                                     <li class="active"><a href="?page={{ page }}">{{ page }}</a></li>
-                                    {% else %}
+                                {% else %}
                                     <li><a href="?page={{ page }}">{{ page }}</a></li>
                                 {% endif %}
 
@@ -129,15 +131,7 @@
 
                         <div class="brands_products"><!--brands_products-->
                             <h2>برنـد ها</h2>
-                            <div class="brands-name">
-                                <ul class="nav nav-pills nav-stacked">
-                                    <li><a href=""> <span class="pull-left">(50)</span>برنـد 1</a></li>
-                                    <li><a href=""> <span class="pull-left">(56)</span>برنـد 2</a></li>
-                                    <li><a href=""> <span class="pull-left">(27)</span>برنـد 3</a></li>
-                                    <li><a href=""> <span class="pull-left">(32)</span>برنـد 4</a></li>
-                                    <li><a href=""> <span class="pull-left">(5)</span>برنـد 5</a></li>
-                                </ul>
-                            </div>
+                            {% render_partial 'eshop_products:brand' %}
                         </div><!--/brands_products-->
 
                         <div class="price-range"><!--price-range-->

@@ -4,6 +4,7 @@ from .models import Product
 from django.http import Http404
 from eshop_products.models import Tag
 from eshop_product_category.models import Category
+from eshop_brand.models import Brand
 
 
 # Create your views here.
@@ -58,3 +59,26 @@ class SearchProductView(ListView):
         if query is not None:
             return Product.objects.search(query)
         return Product.objects.get_active()
+
+
+def product_brand(request, *args, **kwargs):
+    brand = Brand.objects.all()
+    context = {
+        'brand': brand
+    }
+    return render(request, 'products/product_brand_partial.html', context)
+
+
+class ProductBrandList(ListView):
+    template_name = 'products/products_list.html'
+    paginate_by = 2
+
+    def get_queryset(self):
+
+        brand_url = self.kwargs['brand_url']
+        brand = Brand.objects.filter(url=brand_url).first()
+        if brand is not None:
+            product = Product.objects.filter(Brand_id=brand.id).all()
+        else:
+            raise Http404('محصولی با انی برند ثبت نشده')
+        return product
