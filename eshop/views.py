@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from eshop_sliders.models import Slider
 
 
 # Header Code Behind
@@ -22,3 +23,11 @@ def home_page(request):
         'data': 'data'
     }
     return render(request=request, template_name="home_page.html", context=context)
+
+
+def sliders(request, *args, **kwargs):
+    all_slider_is_active = Slider.objects.get_queryset().filter(is_active=True).all()
+    context = {
+        'sliders': all_slider_is_active
+    }
+    return render(request, 'sliders_partial.html', context)
