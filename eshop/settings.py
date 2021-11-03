@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'eshop_account',
     'eshop_products',
     'eshop_tag',
+    'eshop_brand',
     'eshop_product_category',
     'treebeard',
     'mptt',

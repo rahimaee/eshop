@@ -1,0 +1,29 @@
+{% load static %}
+{% load mptt_tags %}
+
+<h2>دسته بندی محصولات</h2>
+<div class="panel-group category-products" id="accordian"><!--category-productsr-->
+    {% recursetree category %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h8 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordian" href="#{{ node.name }}">
+                        <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                        {{ node.name }}
+                    </a>
+                </h8>
+            </div>
+            {% if not node.is_leaf_node %}
+                <div id="{{ node.name }}" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <ul>
+                            <li><a href="">  {{ children }} </a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    {% endrecursetree %}
+
+</div><!--/category-productsr-->

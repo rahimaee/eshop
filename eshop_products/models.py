@@ -6,6 +6,7 @@ from django.db.models import Q
 from mptt.fields import TreeForeignKey, TreeManyToManyField
 from eshop_product_category.models import Category
 from eshop_tag.models import Tag
+from eshop_brand.models import Brand
 
 
 # Create your models here.
@@ -54,6 +55,7 @@ class Product(models.Model):
     is_active = models.BooleanField(default=False, verbose_name='فعال/غیرفعال')
     Tag = models.ManyToManyField(Tag, blank=True)
     # category = models.ManyToManyField(Category, blank=True)
+    Brand = models.OneToOneField(Brand, blank=True, on_delete=models.CASCADE)
     category = TreeManyToManyField(Category, blank=True)
     objects = ProductManager()
 
