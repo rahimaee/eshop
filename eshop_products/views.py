@@ -82,3 +82,26 @@ class ProductBrandList(ListView):
         else:
             raise Http404('محصولی با انی برند ثبت نشده')
         return product
+
+
+def product_suggestion(request, *args, **kwargs):
+    product_id = kwargs['productId']
+    product_all_category = Product.objects.filter(id=product_id).first().category.all()
+    all_product = Product.objects.all().values('id')
+    all_product_id = list(map(lambda x: x['id'], all_product))
+    all_product_relationship_category = Product.objects.filter(category__in=all_product_id).distinct()[6:]
+    sug1 = []
+    sug2 = []
+    temp = 1
+    for item in all_product_relationship_category:
+        if temp <= 3:
+            sug1.append(item)
+            temp += 1
+        else:
+            sug2.append(item)
+
+    context = {
+        'sug1': sug1,
+        'sug2': sug2,
+    }
+    return render(request, 'products/product_suggestion_partial.html', context)

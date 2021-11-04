@@ -55,7 +55,7 @@ class Product(models.Model):
     is_active = models.BooleanField(default=False, verbose_name='فعال/غیرفعال')
     Tag = models.ManyToManyField(Tag, blank=True)
     # category = models.ManyToManyField(Category, blank=True)
-    Brand = models.OneToOneField(Brand, blank=True, on_delete=models.CASCADE)
+    Brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
     category = TreeManyToManyField(Category, blank=True)
     objects = ProductManager()
 

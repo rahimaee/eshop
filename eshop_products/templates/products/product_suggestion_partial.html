@@ -1,0 +1,41 @@
+{% load static %}
+<div class="item active">
+    {% for sug1 in sug1 %}
+        <div class="col-sm-4">
+            <div class="product-image-wrapper">
+                <div class="single-products">
+                    <div class="productinfo text-center">
+                        <img src="images/home/recommend2.jpg" alt=""/>
+                        <h2>{{ sug1.price }} ريال</h2>
+                        <p>{{ sug1.title }}</p>
+                        <button type="button" class="btn btn-default add-to-cart"><i
+                                class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    {% endfor %}
+</div>
+<div class="item">
+    {% for sug2 in sug2 %}
+
+        <div class="col-sm-4">
+            <div class="product-image-wrapper">
+                <div class="single-products">
+                    <div class="productinfo text-center">
+                        <img src="images/home/recommend2.jpg" alt=""/>
+                        <h2>{{ sug2.price }} ريال</h2>
+                        <p>{{ sug2.title }}</p>
+                        <button type="button" class="btn btn-default add-to-cart"><i
+                                class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+</div>
