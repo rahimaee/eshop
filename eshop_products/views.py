@@ -98,21 +98,9 @@ def product_suggestion(request, *args, **kwargs):
     all_product = Product.objects.all().values('id')
     all_product_id = list(map(lambda x: x['id'], all_product))
     all_product_relationship_category = Product.objects.filter(category__in=all_product_id).distinct()[:9]
-    sug1 = []
-    sug2 = []
     suggestion = list(my_grouper(3, all_product_relationship_category))
-    print(suggestion)
-    temp = 1
-    for item in all_product_relationship_category:
-        if temp <= 3:
-            sug1.append(item)
-            temp += 1
-        else:
-            sug2.append(item)
-
     context = {
         'suggestion': suggestion,
-        'sug1': sug1,
-        'sug2': sug2,
+
     }
     return render(request, 'products/product_suggestion_partial.html', context)

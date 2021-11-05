@@ -7,14 +7,26 @@
                 <div class="product-image-wrapper">
                     <div class="single-products">
                         <div class="productinfo text-center">
-                            <img style="width: 380px;height: 330px" src="{{ sug.get_image_url }}" alt="{{ sug.title }}"/>
-                            <h2>1.250.000 ريال</h2>
-                            <p>توضیحات کوتاه محصول</p>
-                            <button type="button" class="btn btn-default add-to-cart"><i
-                                    class="fa fa-shopping-cart"></i>افزودن
-                                به سبـد خریـد
-                            </button>
+                            <img src="{{ sug.get_image_url }}" style="width: 268px;height: 250px" alt="{{ sug.title }}"/>
+                            <h2>{{ sug.price }} ريال</h2>
+                            <p>{{ sug.title }}</p>
+                            <a href="#" class="btn btn-default add-to-cart"><i
+                                    class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
                         </div>
+                        <div class="product-overlay">
+                            <div class="overlay-content">
+                                <h2>{{ sug.price }} ريال </h2>
+                                <p>توضیحات کوتـاه محصـول</p>
+                                <a href="#" class="btn btn-default add-to-cart"><i
+                                        class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="choose">
+                        <ul class="nav nav-pills nav-justified">
+                            <li><a href="{{ sug.get_absolute_url }}"><i class="fa fa-plus-square"></i>مشاهده</a></li>
+                            <li><a href=""><i class="fa fa-plus-square"></i>مقایسه</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -22,47 +34,3 @@
 
     </div>
 {% endfor %}
-
-
-
-{##}
-{#<div class="item active">#}
-{#    {% for sug1 in sug1 %}#}
-{#        <div class="col-sm-4">#}
-{#            <div class="product-image-wrapper">#}
-{#                <div class="single-products">#}
-{#                    <div class="productinfo text-center">#}
-{#                        <img src="{{ sug1.get_image_url }}" alt=""/>#}
-{#                        <h2>{{ sug1.image }} ريال</h2>#}
-{#                        <p>{{ sug1.image }} ريال</p>#}
-{#                        <button type="button" class="btn btn-default add-to-cart"><i#}
-{#                                class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد#}
-{#                        </button>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{##}
-{##}
-{#    {% endfor %}#}
-{#</div>#}
-{#<div class="item">#}
-{#    {% for sug2 in sug2 %}#}
-{##}
-{#        <div class="col-sm-4">#}
-{#            <div class="product-image-wrapper">#}
-{#                <div class="single-products">#}
-{#                    <div class="productinfo text-center">#}
-{#                        <img src="{{ sug2.get_image_url }}" alt=""/>#}
-{#                        <h2>{{ sug2.price }} ريال</h2>#}
-{#                        <p>{{ sug1.image.url }} ريال</p>#}
-{#                        <button type="button" class="btn btn-default add-to-cart"><i#}
-{#                                class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد#}
-{#                        </button>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{##}
-{#    {% endfor %}#}
-{#</div>#}
