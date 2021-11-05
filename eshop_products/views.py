@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView
-from .models import Product
+from .models import Product, Gallery
 from django.http import Http404
 from eshop_products.models import Tag
 from eshop_product_category.models import Category
@@ -12,7 +12,7 @@ from eshop_brand.models import Brand
 
 class ProductsList(ListView):
     template_name = 'products/products_list.html'
-    paginate_by = 2
+    paginate_by = 12
 
     def get_queryset(self):
         return Product.objects.get_active()
@@ -20,7 +20,7 @@ class ProductsList(ListView):
 
 class ProductsListByCategory(ListView):
     template_name = 'products/products_list.html'
-    paginate_by = 2
+    paginate_by = 12
 
     def get_queryset(self):
         category_name = self.kwargs['category_name']
@@ -39,11 +39,13 @@ def products_detail(request, *args, **kwargs):
         raise Http404()
 
     tag = product.Tag.all()
+    gallery = Gallery.objects.filter(product_id=product_id).all()
     category = Category.objects.all()
     context = {
         'product': product,
         'tag': tag,
         'category': category,
+        'gallery': gallery
     }
 
     return render(request, 'products/product-details.html', context)
@@ -51,7 +53,7 @@ def products_detail(request, *args, **kwargs):
 
 class SearchProductView(ListView):
     template_name = 'products/products_list.html'
-    paginate_by = 2
+    paginate_by = 12
 
     def get_queryset(self):
         request = self.request
@@ -71,7 +73,7 @@ def product_brand(request, *args, **kwargs):
 
 class ProductBrandList(ListView):
     template_name = 'products/products_list.html'
-    paginate_by = 2
+    paginate_by = 12
 
     def get_queryset(self):
 

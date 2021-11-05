@@ -24,6 +24,19 @@ def upload_image_path(instance, filename):
     return f"product/{final_name}"
 
 
+def upload_image_gallery_path(instance, filename):
+    new_name = randint(1, 100000)
+    name, ext = get_filename_ext(filename)
+    final_name = f"{new_name}{ext}"
+    return f"product/gallery/{final_name}"
+
+
+# class imagess(models.Model):
+#     image = models.ImageField(upload_to=upload_image_path, null=True, blank=True, verbose_name='تصویر')
+#     is_active = models.BooleanField(default=False, verbose_name='فعال/غیرفعال')
+#     product = models.ForeignKey(Pr,on_delete=models.CASCADE, related_name="images")
+
+
 class ProductManager(models.Manager):
     def get_active(self):
         return self.get_queryset().filter(is_active=True)
@@ -54,7 +67,6 @@ class Product(models.Model):
     image = models.ImageField(upload_to=upload_image_path, null=True, blank=True, verbose_name='تصویر')
     is_active = models.BooleanField(default=False, verbose_name='فعال/غیرفعال')
     Tag = models.ManyToManyField(Tag, blank=True)
-    # category = models.ManyToManyField(Category, blank=True)
     Brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
     category = TreeManyToManyField(Category, blank=True)
     objects = ProductManager()
@@ -68,3 +80,13 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return f"{reverse('products_url:list')}{self.id}/{self.title.replace(' ', '-')}"
+
+    def get_image_url(self):
+        print(self.image)
+        return f"/media/{self.image}"
+
+
+class Gallery(models.Model):
+    image = models.ImageField(upload_to=upload_image_gallery_path, null=True, blank=True, verbose_name='تصویر')
+    is_active = models.BooleanField(default=False, verbose_name='فعال/غیرفعال')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="images")

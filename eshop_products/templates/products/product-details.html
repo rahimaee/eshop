@@ -64,6 +64,8 @@
                                 <!-- Wrapper for slides -->
                                 <div class="carousel-inner">
                                     <div class="item">
+
+
                                         <a href=""><img src="{% static 'images/product-details/similar1.jpg' %}" alt=""></a>
                                         <a href=""><img src="{% static 'images/product-details/similar2.jpg' %}" alt=""></a>
                                         <a href=""><img src="{% static 'images/product-details/similar3.jpg' %}" alt=""></a>
@@ -74,9 +76,12 @@
                                         <a href=""><img src="{% static 'images/product-details/similar3.jpg' %}" alt=""></a>
                                     </div>
                                     <div class="item active">
-                                        <a href=""><img src="{% static 'images/product-details/similar1.jpg' %}" alt=""></a>
-                                        <a href=""><img src="{% static 'images/product-details/similar2.jpg' %}" alt=""></a>
-                                        <a href=""><img src="{% static 'images/product-details/similar3.jpg' %}" alt=""></a>
+                                        {% for foo in gallery %}
+                                            {% if gallery.count != 0 %}
+                                                <a href=""><img style="width:85px" src="{{ foo.image.url }}" alt=""></a>
+                                            {% endif %}
+                                        {% endfor %}
+
                                     </div>
 
                                 </div>

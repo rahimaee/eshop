@@ -5,9 +5,9 @@
             <div class="product-image-wrapper">
                 <div class="single-products">
                     <div class="productinfo text-center">
-                        <img src="images/home/recommend2.jpg" alt=""/>
-                        <h2>{{ sug1.price }} ريال</h2>
-                        <p>{{ sug1.title }}</p>
+                        <img src="{{ sug1.get_image_url }}" alt=""/>
+                        <h2>{{ sug1.image }} ريال</h2>
+                        <p>{{ sug1.image }} ريال</p>
                         <button type="button" class="btn btn-default add-to-cart"><i
                                 class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد
                         </button>
@@ -26,9 +26,9 @@
             <div class="product-image-wrapper">
                 <div class="single-products">
                     <div class="productinfo text-center">
-                        <img src="images/home/recommend2.jpg" alt=""/>
+                        <img src="{{ sug2.get_image_url }}" alt=""/>
                         <h2>{{ sug2.price }} ريال</h2>
-                        <p>{{ sug2.title }}</p>
+                        <p>{{ sug1.image.url }} ريال</p>
                         <button type="button" class="btn btn-default add-to-cart"><i
                                 class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد
                         </button>
