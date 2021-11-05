@@ -1,41 +1,68 @@
 {% load static %}
-<div class="item active">
-    {% for sug1 in sug1 %}
-        <div class="col-sm-4">
-            <div class="product-image-wrapper">
-                <div class="single-products">
-                    <div class="productinfo text-center">
-                        <img src="{{ sug1.get_image_url }}" alt=""/>
-                        <h2>{{ sug1.image }} ريال</h2>
-                        <p>{{ sug1.image }} ريال</p>
-                        <button type="button" class="btn btn-default add-to-cart"><i
-                                class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد
-                        </button>
+
+{% for sug_list in suggestion %}
+    <div class="item {{ forloop.first|yesno:'active,' }}">
+        {% for sug in sug_list %}
+            <div class="col-sm-4">
+                <div class="product-image-wrapper">
+                    <div class="single-products">
+                        <div class="productinfo text-center">
+                            <img style="width: 380px;height: 330px" src="{{ sug.get_image_url }}" alt="{{ sug.title }}"/>
+                            <h2>1.250.000 ريال</h2>
+                            <p>توضیحات کوتاه محصول</p>
+                            <button type="button" class="btn btn-default add-to-cart"><i
+                                    class="fa fa-shopping-cart"></i>افزودن
+                                به سبـد خریـد
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        {% endfor %}
+
+    </div>
+{% endfor %}
 
 
-    {% endfor %}
-</div>
-<div class="item">
-    {% for sug2 in sug2 %}
 
-        <div class="col-sm-4">
-            <div class="product-image-wrapper">
-                <div class="single-products">
-                    <div class="productinfo text-center">
-                        <img src="{{ sug2.get_image_url }}" alt=""/>
-                        <h2>{{ sug2.price }} ريال</h2>
-                        <p>{{ sug1.image.url }} ريال</p>
-                        <button type="button" class="btn btn-default add-to-cart"><i
-                                class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    {% endfor %}
-</div>
+{##}
+{#<div class="item active">#}
+{#    {% for sug1 in sug1 %}#}
+{#        <div class="col-sm-4">#}
+{#            <div class="product-image-wrapper">#}
+{#                <div class="single-products">#}
+{#                    <div class="productinfo text-center">#}
+{#                        <img src="{{ sug1.get_image_url }}" alt=""/>#}
+{#                        <h2>{{ sug1.image }} ريال</h2>#}
+{#                        <p>{{ sug1.image }} ريال</p>#}
+{#                        <button type="button" class="btn btn-default add-to-cart"><i#}
+{#                                class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد#}
+{#                        </button>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{##}
+{#    {% endfor %}#}
+{#</div>#}
+{#<div class="item">#}
+{#    {% for sug2 in sug2 %}#}
+{##}
+{#        <div class="col-sm-4">#}
+{#            <div class="product-image-wrapper">#}
+{#                <div class="single-products">#}
+{#                    <div class="productinfo text-center">#}
+{#                        <img src="{{ sug2.get_image_url }}" alt=""/>#}
+{#                        <h2>{{ sug2.price }} ريال</h2>#}
+{#                        <p>{{ sug1.image.url }} ريال</p>#}
+{#                        <button type="button" class="btn btn-default add-to-cart"><i#}
+{#                                class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد#}
+{#                        </button>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#    {% endfor %}#}
+{#</div>#}

@@ -1,3 +1,5 @@
+import itertools
+
 from django.shortcuts import render
 from django.views.generic import ListView
 from .models import Product, Gallery
@@ -8,6 +10,9 @@ from eshop_brand.models import Brand
 
 
 # Create your views here.
+def my_grouper(n, iterable):
+    args = [iter(iterable)] * n
+    return ([e for e in t if e is not None] for t in itertools.zip_longest(*args))
 
 
 class ProductsList(ListView):
@@ -41,6 +46,7 @@ def products_detail(request, *args, **kwargs):
     tag = product.Tag.all()
     gallery = Gallery.objects.filter(product_id=product_id).all()
     category = Category.objects.all()
+    gallery = list(my_grouper(3, gallery))
     context = {
         'product': product,
         'tag': tag,
@@ -91,9 +97,11 @@ def product_suggestion(request, *args, **kwargs):
     product_all_category = Product.objects.filter(id=product_id).first().category.all()
     all_product = Product.objects.all().values('id')
     all_product_id = list(map(lambda x: x['id'], all_product))
-    all_product_relationship_category = Product.objects.filter(category__in=all_product_id).distinct()[6:]
+    all_product_relationship_category = Product.objects.filter(category__in=all_product_id).distinct()[:9]
     sug1 = []
     sug2 = []
+    suggestion = list(my_grouper(3, all_product_relationship_category))
+    print(suggestion)
     temp = 1
     for item in all_product_relationship_category:
         if temp <= 3:
@@ -103,6 +111,7 @@ def product_suggestion(request, *args, **kwargs):
             sug2.append(item)
 
     context = {
+        'suggestion': suggestion,
         'sug1': sug1,
         'sug2': sug2,
     }
