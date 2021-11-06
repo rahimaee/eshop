@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Product, Gallery
+from eshop_product_category.models import Category
 
 
 # Register your models here.
@@ -12,11 +13,11 @@ class ProductAdmin(admin.ModelAdmin):
     inlines = [
         ImageInline
     ]
+    filter_horizontal = ('category', 'Tag')
 
     class Meta:
         model = Product
 
 
 admin.site.register(Product, ProductAdmin)
-
 admin.site.register(Gallery)

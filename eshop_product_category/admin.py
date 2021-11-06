@@ -3,6 +3,7 @@ from mptt.admin import MPTTModelAdmin, DraggableMPTTAdmin
 from .models import Category
 from eshop_products.models import Product
 
+
 # admin.site.register(Category, MPTTModelAdmin)
 
 

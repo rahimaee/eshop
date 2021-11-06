@@ -28,7 +28,7 @@ class LoginForm(forms.Form):
 
 class RegisterForm(forms.Form):
     email = forms.CharField(
-        widget=forms.EmailInput(attrs={'placeholder': 'ایمیل خود را وارد کنید'}),
+        widget=forms.EmailInput(attrs={'placeholder': 'ایمیل خود را وارد کنید',}),
         label='ایمیل',
 
     )

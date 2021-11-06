@@ -28,6 +28,7 @@ urlpatterns = [
     path('header', header, name='header'),
     path('footer', footer, name='footer'),
     path('account/', include('eshop_account.urls', namespace='account')),
+    path('contact/', include('eshop_contact.urls', namespace='contact')),
     path('sliders', sliders, name='sliders'),
     path('admin/', admin.site.urls),
 
