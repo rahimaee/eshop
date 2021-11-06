@@ -94,17 +94,23 @@
                                     <p>شناسـه : {{ product.id }}</p>
                                 </div>
                                 <div>
+
+
 									<span>
 										<span>قیمت : {{ product.price }} تومان </span>
 									</span>
                                     <span>
-										<label>تعداد :</label>
-										<input type="text" value="3" class="search_box">
-										<button type="button" class="btn btn-fefault cart">
-											<i class="fa fa-shopping-cart"></i>
-											افـزودن به سبـد خریـد
-										</button>
-									</span>
+                                        <form method="post" action="/add-user-order">
+                                            {% csrf_token %}
+                                            {{ new_order_form.productId }}
+										    <label>تعداد :</label>
+                                            {{ new_order_form.count }}
+										    <button type="submit" class="btn btn-fefault cart">
+											    <i class="fa fa-shopping-cart"></i>
+											    افـزودن به سبـد خریـد
+										    </button>
+                                        </form>
+                                    </span>
                                 </div>
                                 <div>
                                     <p><b>موجـودی :</b> در انبـار موجود می باشد</p>

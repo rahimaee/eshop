@@ -2,6 +2,8 @@ import itertools
 
 from django.shortcuts import render
 from django.views.generic import ListView
+
+from eshop_order.forms import UserNewOrderForm
 from .models import Product, Gallery
 from django.http import Http404
 from eshop_products.models import Tag
@@ -39,6 +41,7 @@ class ProductsListByCategory(ListView):
 def products_detail(request, *args, **kwargs):
     product_name = kwargs['name']
     product_id = kwargs['productId']
+    new_order_form = UserNewOrderForm(request.POST or None, initial={'productId': product_id})
     product = Product.objects.get_by_id(product_id)
     if product is None or not product.is_active:
         raise Http404()
@@ -51,7 +54,8 @@ def products_detail(request, *args, **kwargs):
         'product': product,
         'tag': tag,
         'category': category,
-        'gallery': gallery
+        'gallery': gallery,
+        'new_order_form': new_order_form,
     }
 
     return render(request, 'products/product-details.html', context)
