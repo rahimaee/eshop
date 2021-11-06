@@ -48,3 +48,11 @@ def sliders(request, *args, **kwargs):
         'sliders': all_slider_is_active
     }
     return render(request, 'sliders_partial.html', context)
+
+
+def about_page(request):
+    site_settings = SiteSettings.objects.first()
+    context = {
+        'site_settings': site_settings,
+    }
+    return render(request, 'about_page.html', context)

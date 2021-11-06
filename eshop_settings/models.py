@@ -27,6 +27,7 @@ class SiteSettings(models.Model):
     about = models.TextField(verbose_name='درباره ما', default='درباره ما')
     logo = models.ImageField(upload_to=upload_image_path, blank=True, default='')
     CopyRight = models.CharField(max_length=150, verbose_name='کپی رایت سایت')
+    map = models.ImageField(upload_to=upload_image_path, blank=True, default='')
 
     class Meta:
         verbose_name = 'تنضیمات سایت'

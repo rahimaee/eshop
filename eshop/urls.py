@@ -19,7 +19,7 @@ from django.urls import path, include
 
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import home_page, header, footer, sliders
+from .views import home_page, header, footer, sliders, about_page
 
 urlpatterns = [
     path('', home_page, name='starting_page'),
@@ -29,8 +29,9 @@ urlpatterns = [
     path('header', header, name='header'),
     path('footer', footer, name='footer'),
     path('account/', include('eshop_account.urls', namespace='account')),
-    path('contact/', include('eshop_contact.urls', namespace='contact')),
+    path('contact-us/', include('eshop_contact.urls', namespace='contact')),
     path('sliders', sliders, name='sliders'),
+    path('about-us', about_page, name='about-us'),
     path('admin/', admin.site.urls),
 
 ]
