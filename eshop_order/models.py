@@ -30,3 +30,6 @@ class OrderDetail(models.Model):
 
     def __str__(self):
         return self.product.title
+
+    def get_detail_some(self):
+        return self.count * self.product.price

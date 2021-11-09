@@ -19,6 +19,8 @@ from django.urls import path, include
 
 from django.conf import settings
 from django.conf.urls.static import static
+
+from eshop_order.views import send_request, verify
 from .views import home_page, header, footer, sliders, about_page
 
 urlpatterns = [
@@ -33,6 +35,8 @@ urlpatterns = [
     path('contact-us/', include('eshop_contact.urls', namespace='contact')),
     path('sliders', sliders, name='sliders'),
     path('about-us', about_page, name='about-us'),
+    path('request/', send_request, name='request'),
+    path('verify/', verify, name='verify'),
     path('admin/', admin.site.urls),
 
 ]
